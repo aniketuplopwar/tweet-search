@@ -1,0 +1,21 @@
+.search-panel {
+  h1 {
+
+    img {
+      border-radius: 50%;
+    }
+
+    .tweet-search-title {
+      color: #3498db;
+    }
+  }
+   input {
+     max-width: 400px;
+     width: 50%;
+     height: 30px;
+   }
+
+  button {
+    height: 40px;
+  }
+}
