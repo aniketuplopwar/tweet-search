@@ -1,0 +1,11 @@
+{
+  "ignore": [],
+  "env": {
+    "testing": {
+      "presets": ["es2015", "stage-2", "react"]
+    },
+    "production": {
+      "presets": [["es2015", { "modules": false }], "stage-2", "react", "flow"]
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
-import { searchTweetReducer } from './searchTwitterReducer'
+import { combineReducers } from 'redux';
+import { searchTweetReducer } from './searchTwitterReducer';
 
 export default combineReducers({
-  tweetSearch: searchTweetReducer
-})
+  tweetSearch: searchTweetReducer,
+});

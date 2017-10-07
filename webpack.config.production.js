@@ -46,29 +46,29 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:5000',
-    'webpack/hot/dev-server',
     './src/client/index'
   ],
   output: {
     path: __dirname,
-    filename: 'bundle.js',
+    filename: './dist/app.js',
     publicPath: '/static/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
   devtool: 'eval-source-map',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [],
   module: {
     rules: [
       {
         test: /\.js$/, //Check for all js files
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              presets: ['babel-preset-react', 'babel-preset-stage-2']
+            }
           }
         ]
       },
@@ -85,18 +85,8 @@ module.exports = {
         loader: "json-loader"  //JSON loader
       }
     ]
-  },
-  "env": {
-    "test": {
-      "presets":[
-        ["es2015", { "modules": false }],
-        "react",
-        "stage-0"
-      ],
-      "plugins": [
-        "transform-es2015-modules-commonjs",
-        "dynamic-import-node"
-      ]
-    }
   }
 };
+
+
+

@@ -1,46 +1,66 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import Tweet from '../tweet/tweet';
-import './tweetList.scss'
+import './tweetList.scss';
 
 class TweetList extends React.Component {
-  renderTweet (tweetInfo) {
+
+  static NO_RESULT_FOUND_MESSAGE = '<h2>No result found for "<strong>{searchString}</strong>"</h2>';
+
+  renderTweet(tweetInfo, tweetIdx) {
     return (
-      <Tweet tweetInfo={tweetInfo} />
-    )
+      <Tweet
+        key={tweetIdx}
+        tweetInfo={tweetInfo}
+      />
+    );
   }
 
-  renderTweetFromList (tweetDataList) {
-    let tweetList = []
-    for (let i in tweetDataList) {
-      tweetList.push(this.renderTweet(tweetDataList[i], i))
+  renderTweetFromList(tweetDataList) {
+    let tweetList = [];
+    for (let i = 0; i < tweetDataList.length; i++) {
+      tweetList.push(this.renderTweet(tweetDataList[i], i));
     }
-    return (
-      <div>{tweetList}</div>
-    )
+    return tweetList;
   }
 
-  renderResult (searchString, tweetList) {
-    if( typeof searchString !== 'undefined' && tweetList.length === 0) {
-      return (
-        <div>
-          <h2> No result found for "<strong>{searchString}</strong>"</h2>
-        </div>
-      )
+  renderResult(searchString, tweetList) {
+    let result;
+
+    if (typeof searchString !== 'undefined' && tweetList.length === 0) {
+      result = (
+          <div
+            className="no-result-found">
+            {this.NO_RESULT_FOUND_MESSAGE}
+          </div>
+        );
     } else {
       let tweetListHTML = this.renderTweetFromList(this.props.tweets);
-      return( <div id='tweet-container'>{tweetListHTML}</div>)
-    }
 
+      result = (
+        <div
+          id="tweet-container">
+          {tweetListHTML}
+        </div>);
+    }
+    return result;
   }
 
-  render () {
-    let result = this.renderResult(this.props.searchString, this.props.tweets)
+  render() {
+    const result = this.renderResult(this.props.searchString, this.props.tweets);
     return (
-      <div className='tweet-list-container about'>
-        <div id='tweet-container'>{result}</div>
+      <div
+        className="tweet-list-container">
+       {result}
       </div>
-    )
+    );
   }
 }
 
-export default TweetList
+TweetList.propTypes = {
+  searchString: PropTypes.string.isRequired,
+  tweets: PropTypes.array,
+};
+
+
+export default TweetList;

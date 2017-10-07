@@ -1,5 +1,5 @@
 import request from 'request';
-const TWITTER_OMBED_URL =  'https://publish.twitter.com/oembed?url=';
+const TWITTER_OMBED_URL = 'https://publish.twitter.com/oembed?url=';
 
 
 /**
@@ -8,10 +8,7 @@ const TWITTER_OMBED_URL =  'https://publish.twitter.com/oembed?url=';
  * @param tweetUserId
  * @returns {string}
  */
-const prepareTweetUrl = (tweetId, tweetUserId)=> {
-  return 'https://twitter.com/' + tweetUserId + '/status/' + tweetId;
-}
-
+const prepareTweetUrl = (tweetId, tweetUserId) => 'https://twitter.com/'.concat(tweetUserId).concat('/status/').concat(tweetId);
 
 /**
  * Fetch HTML info for a given tweet
@@ -19,22 +16,22 @@ const prepareTweetUrl = (tweetId, tweetUserId)=> {
  * @param tweetUserId
  * @returns {Promise}
  */
-const getTweetInfo = (tweetId, tweetUserId)=>{
-
-  return new Promise((resolve, reject)=>{
-    request(TWITTER_OMBED_URL+prepareTweetUrl(tweetId, tweetUserId), function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          let tweetInfo = {
+const getTweetInfo = (tweetId, tweetUserId) => {
+  return new Promise((resolve, reject) => {
+    request(TWITTER_OMBED_URL + prepareTweetUrl(tweetId, tweetUserId),
+      (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+          const tweetInfo = {
             tweetId,
             tweetUserId,
-            'tweetHTML' : JSON.parse(body).html
-          }
+            tweetHTML: JSON.parse(body).html,
+          };
           resolve(tweetInfo);
-      }
-      reject(error)
-    })
+        }
+        reject(error);
+      });
   });
-}
+};
 
 
 /**
@@ -43,25 +40,23 @@ const getTweetInfo = (tweetId, tweetUserId)=>{
  * @returns {Promise}
  */
 const getInfoForTweetList = (tweetList) => {
-  return new Promise((resolve, reject) =>{
-    let tweetHTMLPromises = [];
-    for(let idx in tweetList) {
-      let tweetInfo = tweetList[idx];
-      let tweetPromise = getTweetInfo(tweetInfo.tweetId, tweetInfo.tweetUserId);
+  return new Promise((resolve, reject) => {
+    const tweetHTMLPromises = [];
+    for (let idx = 0; idx < tweetList.length; idx++) {
+      const tweetInfo = tweetList[idx];
+      const tweetPromise = getTweetInfo(tweetInfo.tweetId, tweetInfo.tweetUserId);
       tweetHTMLPromises.push(tweetPromise);
     }
 
-    Promise.all(tweetHTMLPromises).then(data=>{
-      resolve(data)
+    Promise.all(tweetHTMLPromises).then(data => {
+      resolve(data);
     }).catch(err => {
-      reject(err)
+      reject(err);
     });
-
-  })
-
-}
+  });
+};
 
 export default {
   getTweetInfo,
-  getInfoForTweetList
+  getInfoForTweetList,
 };

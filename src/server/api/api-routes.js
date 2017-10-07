@@ -1,7 +1,8 @@
 import express from 'express';
 import SearchTweetAPI from './tweetSearchService';
 
-const router = express.Router();
+const routerApi = express.Router;
+const router = routerApi();
 
 
 /**
@@ -9,18 +10,16 @@ const router = express.Router();
  * URL params-
  *   searchString: string to search tweets
  **/
-router.get('/search/:searchString', function (req, res) {
+router.get('/search/:searchString', (req, res) => {
   try {
-    SearchTweetAPI.searchTweets(req.params.searchString).then(data=>{
+    SearchTweetAPI.searchTweets(req.params.searchString).then(data => {
       res.send(data);
-    }).catch(err=>{
-      console.log(err);
-      res.send(data);
+    }).catch(err => {
+      res.send(err);
     });
-  }catch(err) {
-    console.log('ERROR: '+err);
+  } catch (err) {
+    res.send(err);
   }
-
 });
 
 module.exports = router;

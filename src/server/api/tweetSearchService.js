@@ -4,24 +4,23 @@ import tweetHTMLService from './tweetHTMLService';
 
 const T = new Twit(TWEET_API_CONFIG);
 
-
 /**
  *  Translates dor filter out only the require data from the search tweet response
  * @param data
  * @returns {Array}
  */
-const filterRequiredTweetInfo= (data) => {
-  let tweets = data.statuses,
-    totalTweets = [];
+const filterRequiredTweetInfo = (data) => {
+  const tweets = data.statuses;
+  const totalTweets = [];
 
-  for(let idx in tweets) {
-    let tweetInfo = {};
+  for (let idx = 0; idx < tweets.length; idx ++) {
+    const tweetInfo = {};
     tweetInfo.tweetId = tweets[idx].id_str;
     tweetInfo.tweetUserId = tweets[idx].user.screen_name;
     totalTweets.push(tweetInfo);
   }
   return totalTweets;
-}
+};
 
 /**
  * Get List of tweets information for the given search String
@@ -29,15 +28,14 @@ const filterRequiredTweetInfo= (data) => {
  */
 const getTweetsInformationFromTwitter = (searchStr) => {
   return new Promise((resolve, reject) => {
-    T.get('search/tweets', { q: searchStr, count: 100 }, function(err, data) {
-      if(err) {
+    T.get('search/tweets', { q: searchStr, count: 100 }, (err, data) => {
+      if (err) {
         reject(err);
       }
-      resolve(data)
-
+      resolve(data);
     });
-  })
-}
+  });
+};
 
 
 /**
@@ -46,17 +44,18 @@ const getTweetsInformationFromTwitter = (searchStr) => {
  * @returns {Promise}
  */
 const searchTweets = (searchStr) => {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     getTweetsInformationFromTwitter(searchStr).then(data => {
+      const totalTweets = filterRequiredTweetInfo(data);
+      const firstFoldTweets = totalTweets.slice(0, 10);
 
-      let totalTweets = filterRequiredTweetInfo(data),
-        firstFoldTweets = totalTweets.slice(0,10);
+      tweetHTMLService.getInfoForTweetList(firstFoldTweets).then(tweetHTMLInfoList => {
+        const tweetSearchResult = {};
+        const tweetList = [];
 
-      tweetHTMLService.getInfoForTweetList(firstFoldTweets).then(data => {
-        let tweetSearchResult = {},tweetList = [];
-        if(data.length) {
-          for(let i in data) {
-            tweetList.push(data[i]);
+        if (tweetHTMLInfoList.length) {
+          for (let i = 0; i < tweetHTMLInfoList.length; i++) {
+            tweetList.push(tweetHTMLInfoList[i]);
           }
         }
 
@@ -66,13 +65,8 @@ const searchTweets = (searchStr) => {
       }).catch(err => {
         reject(err);
       });
-    })
+    });
+  });
+};
 
-  })
-}
-
-export default {searchTweets};
-
-
-
-
+export default { searchTweets };

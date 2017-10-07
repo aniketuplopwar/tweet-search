@@ -1,22 +1,27 @@
-import React from 'react'
-import './tweet.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './tweet.scss';
 
 class Tweet extends React.Component {
-  createMarkup (tweetHTML) {
-    return { __html: tweetHTML }
+  createMarkup(tweetHTML) {
+    return { __html: tweetHTML };
   }
 
   render() {
-    let tweetInfo = this.props.tweetInfo,
-        tweetUrl = '/' + tweetInfo.tweetUserId + '/' + tweetInfo.tweetId;
+    const tweetInfo = this.props.tweetInfo;
+    const tweetUrl = '/'.concat(tweetInfo.tweetUserId).concat('/').concat(tweetInfo.tweetId);
 
     return (
       <div className="tweet-container">
-        <div dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
-        <a href={tweetUrl} target='_blank'> Open in new tab</a>
+        <div className="tweet-content" dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
+        <a className="tweet-url" href={tweetUrl} target="_blank"> Open in new tab</a>
       </div>
-    )
+    );
   }
 }
 
-export default Tweet
+Tweet.propTypes = {
+  tweetInfo: PropTypes.object
+};
+
+export default Tweet;
