@@ -4,6 +4,10 @@ export const searchTweetReducer = (state = [], action) => {
       return action.info;
     case 'SEARCH_TWEET_SUCCESS':
       return action.info;
+    case 'LOAD_MORE_TWEET_INPROGRESS':
+      return action.info;
+    case 'LOAD_MORE_TWEET_SUCCESS':
+      return action.info;
     default:
       return state;
   }

@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TweetList from '../tweetList/tweetList';
+import Spinner from '../spinner/spinner';
 import './tweetSearchResult.scss';
 
-export class TweetSearchResult extends React.Component {
+class TweetSearchResult extends React.Component {
 
   renderSearchNote(searchInProgress, searchString) {
     if (searchInProgress) {
@@ -15,28 +16,21 @@ export class TweetSearchResult extends React.Component {
       (<h4>Tweets search for "<strong>{searchString}</strong>"</h4>);
   }
 
-  renderPageLoader() {
-    return (
-      <div
-        className="loader absolute-center" />);
-  }
 
   render() {
     const tweetSearchResult = this.props.tweetSearchResult;
     const tweetList = tweetSearchResult ? tweetSearchResult.tweetList : [];
     const searchString = this.props.searchString;
-    const result = this.props.searchInProgress ? this.renderPageLoader() :
+    const result = this.props.searchInProgress ? <Spinner /> :
       <TweetList searchString={searchString} tweets={tweetList} />;
     const searchNote = this.renderSearchNote(this.props.searchInProgress, this.props.searchString);
+
 
     return (
       <div>
         {searchNote}
         <div
-          id="tweet-container"
-          className="result-container">
-          {result}
-          </div>
+          className="result-container">{result}</div>
       </div>
     );
   }
@@ -44,14 +38,14 @@ export class TweetSearchResult extends React.Component {
 
 TweetSearchResult.propTypes = {
   searchInProgress: PropTypes.bool,
-  tweetSearchResult: PropTypes.array,
+  tweetSearchResult: PropTypes.object,
   searchString: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
   return {
     searchInProgress: state.tweetSearch ? state.tweetSearch.searchInProgress : false,
-    tweetSearchResult: state.tweetSearch ? state.tweetSearch.tweetSearchResult : [],
+    tweetSearchResult: state.tweetSearch ? state.tweetSearch.tweetSearchResult : {},
     searchString: state.tweetSearch ? state.tweetSearch.searchString : '',
   };
 };

@@ -9,19 +9,16 @@ class Tweet extends React.Component {
 
   render() {
     const tweetInfo = this.props.tweetInfo;
-    const tweetUrl = '/'.concat(tweetInfo.tweetUserId).concat('/').concat(tweetInfo.tweetId);
-
     return (
-      <div className="tweet-container">
-        <div className="tweet-content" dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
-        <a className="tweet-url" href={tweetUrl} target="_blank"> Open in new tab</a>
-      </div>
+        <div
+          className="tweet-content"
+          dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
     );
   }
 }
 
 Tweet.propTypes = {
-  tweetInfo: PropTypes.object
+  tweetInfo: PropTypes.object.required,
 };
 
 export default Tweet;

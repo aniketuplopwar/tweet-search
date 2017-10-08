@@ -6,7 +6,7 @@ router.use(express.static('../../../../'));
 router.use(express.static('dist'));
 
 // define the home page route
-router.get('/', (req, res) => {
+router.get('/*', (req, res) => {
   res.sendFile('index.html');
 });
 

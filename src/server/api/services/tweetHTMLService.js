@@ -16,7 +16,7 @@ const prepareTweetUrl = (tweetId, tweetUserId) => 'https://twitter.com/'.concat(
  * @param tweetUserId
  * @returns {Promise}
  */
-const getTweetInfo = (tweetId, tweetUserId) => {
+const getTweetInfo = (tweetUserId, tweetId) => {
   return new Promise((resolve, reject) => {
     request(TWITTER_OMBED_URL + prepareTweetUrl(tweetId, tweetUserId),
       (error, response, body) => {
@@ -44,7 +44,7 @@ const getInfoForTweetList = (tweetList) => {
     const tweetHTMLPromises = [];
     for (let idx = 0; idx < tweetList.length; idx++) {
       const tweetInfo = tweetList[idx];
-      const tweetPromise = getTweetInfo(tweetInfo.tweetId, tweetInfo.tweetUserId);
+      const tweetPromise = getTweetInfo(tweetInfo.tweetUserId, tweetInfo.tweetId);
       tweetHTMLPromises.push(tweetPromise);
     }
 

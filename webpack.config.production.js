@@ -46,7 +46,7 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    './src/client/index'
+    './src/client/app'
   ],
   output: {
     path: __dirname,

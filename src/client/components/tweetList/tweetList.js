@@ -8,16 +8,23 @@ class TweetList extends React.Component {
   static NO_RESULT_FOUND_MESSAGE = '<h2>No result found for "<strong>{searchString}</strong>"</h2>';
 
   renderTweet(tweetInfo, tweetIdx) {
+    const tweetUrl = 'viewTweet/'.concat(tweetInfo.tweetUserId).concat('/').concat(tweetInfo.tweetId);
+    const tweetLink = (<a class="open-in-new-tab-link" href={tweetUrl} target="_blank">open </a>);
     return (
-      <Tweet
-        key={tweetIdx}
-        tweetInfo={tweetInfo}
-      />
+      <div>
+        <div class="tweet-wrapper">
+          <Tweet
+            key={tweetIdx}
+            tweetInfo={tweetInfo}
+          />
+          {tweetLink}
+        </div>
+      </div>
     );
   }
 
   renderTweetFromList(tweetDataList) {
-    let tweetList = [];
+    const tweetList = [];
     for (let i = 0; i < tweetDataList.length; i++) {
       tweetList.push(this.renderTweet(tweetDataList[i], i));
     }
@@ -29,17 +36,17 @@ class TweetList extends React.Component {
 
     if (typeof searchString !== 'undefined' && tweetList.length === 0) {
       result = (
-          <div
-            className="no-result-found">
-            {this.NO_RESULT_FOUND_MESSAGE}
-          </div>
+        <div
+          className="no-result-found">
+          {this.NO_RESULT_FOUND_MESSAGE}
+        </div>
         );
     } else {
       let tweetListHTML = this.renderTweetFromList(this.props.tweets);
 
       result = (
         <div
-          id="tweet-container">
+          class="tweet-list-container">
           {tweetListHTML}
         </div>);
     }

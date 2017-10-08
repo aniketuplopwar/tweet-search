@@ -1,5 +1,5 @@
 import Twit from 'twit';
-import TWEET_API_CONFIG from './config/tweet-api-config';
+import TWEET_API_CONFIG from '../config/tweet-api-config';
 import tweetHTMLService from './tweetHTMLService';
 
 const T = new Twit(TWEET_API_CONFIG);
