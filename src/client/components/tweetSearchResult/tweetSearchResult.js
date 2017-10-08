@@ -22,11 +22,23 @@ class TweetSearchResult extends React.Component {
     };
   }
 
+  /**
+   * Calculates the remaining search result pages
+   * @param totalItem
+   * @param itemsPerPage
+   * @param currentPage
+   * @returns {number}
+   */
   calculatePageRemaining(totalItem, itemsPerPage, currentPage) {
     if (totalItem <= itemsPerPage) return 0;
     return totalItem / itemsPerPage - currentPage;
   }
 
+  /**
+   * initiates the load more action to load next search results
+   * dispatches 'loadMoreTweetsInProgress' for rendering spinner
+   * dispatches 'loadMoreTweetsSuccess' with appropriate data once the request is complete
+   */
   loadMoreTweetSuccess() {
     const start = this.props.tweetSearchResult.currentPage * this.itemsPerPage;
     const end = start + this.itemsPerPage;
@@ -41,6 +53,12 @@ class TweetSearchResult extends React.Component {
     });
   }
 
+  /**
+   * Renders the tweet search result based on results
+   * shows spinner while work in progress
+   * @param tweetSearchResult
+   * @returns {XML}
+   */
   renderResult(tweetSearchResult) {
     if (this.props.searchInProgress) return (<Spinner />);
 
@@ -50,6 +68,13 @@ class TweetSearchResult extends React.Component {
         tweets={tweetSearchResult.tweetList} />);
   }
 
+  /**
+   * Renders load more button when user is on search results page and
+   * hase more results to show
+   * @param loadMoreInProgress
+   * @param tweetSearchResult
+   * @returns {*}
+   */
   renderLoadMoreButton(loadMoreInProgress, tweetSearchResult) {
     let loadMoreSpace;
     if (loadMoreInProgress) {
@@ -67,6 +92,15 @@ class TweetSearchResult extends React.Component {
     return loadMoreSpace;
   }
 
+  /**
+   * Populates the top section of search result area with appropriate message
+   * Please wait: when search is in progress
+   * Welcome message: when user has not initiated the search
+   * Search for message: when search is complete
+   * @param searchInProgress
+   * @param searchString
+   * @returns {*}
+   */
   renderSearchNote(searchInProgress, searchString) {
     if (searchInProgress) {
       return TweetSearchContent.PLEASE_WAIT;
@@ -75,6 +109,10 @@ class TweetSearchResult extends React.Component {
       (TweetSearchContent.TWEET_SEARCH_FOR.concat(' "').concat(searchString).concat('"'));
   }
 
+  /**
+   * Renders the component
+   * @returns {XML}
+   */
   render() {
     const tweetSearchResult = this.props.tweetSearchResult ? this.props.tweetSearchResult :
       this.tweetSearchResult;
