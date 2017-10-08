@@ -21,6 +21,11 @@ router.get('/search/:searchString', cache(300), (req, res) => {
   });
 });
 
+
+/**
+ * Handling '/getHtml' url to to get html for a single tweet
+ * fro given userId and tweetId
+ */
 router.get('/getHtml/:tweetUserId/:tweetId', cache(300), (req, res) => {
   TweetHTMLService.getTweetInfo(req.params.tweetUserId, req.params.tweetId).then(data => {
     res.send(data);
@@ -29,6 +34,11 @@ router.get('/getHtml/:tweetUserId/:tweetId', cache(300), (req, res) => {
   });
 });
 
+
+/**
+ * Handling '/getTweetHTMLList' url to to get html for a list of tweets
+ * passed as tweetsForNextPage
+ */
 router.post('/getTweetHTMLList', (req, res) => {
   TweetHTMLService.getInfoForTweetList(req.body.tweetsForNextPage).then(data => {
     res.send(data);
