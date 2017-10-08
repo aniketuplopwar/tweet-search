@@ -1,9 +1,16 @@
 # tweet-search
 
-To build use
-
+BUILD:
 <strong>npm run build </strong>
 
-To run use
 
+LINT:
+<strong>npm run lint</strong>
+
+
+TEST:
+<strong>npm run test:react</strong>
+
+
+RUN:
 <strong>npm run start </strong>
