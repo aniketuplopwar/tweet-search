@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import Home from './layout/home';
 import SingleTweet from './layout/singleTweet';
-import NotFound from './layout/notFound';
 
 const Routes = () => (
   <main>
