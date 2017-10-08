@@ -51,17 +51,20 @@ class TweetSearchResult extends React.Component {
   }
 
   renderLoadMoreButton(loadMoreInProgress, tweetSearchResult) {
+    let loadMoreSpace;
     if (loadMoreInProgress) {
-      return  (<Spinner />);
-    }
-    const pageRemaining = this.calculatePageRemaining(tweetSearchResult.totalTweets.length, this.itemsPerPage, tweetSearchResult.currentPage);
+      loadMoreSpace = (<Spinner />);
+    } else {
+      const pageRemaining = this.calculatePageRemaining(tweetSearchResult.totalTweets.length, this.itemsPerPage, tweetSearchResult.currentPage);
 
-    if (tweetSearchResult !== '' && pageRemaining >= 1) {
-      return (<button
-        onClick={() => { this.loadMoreTweetSuccess(); }}>
-        load more
-      </button>);
+      if (tweetSearchResult !== '' && pageRemaining >= 1) {
+        loadMoreSpace = (<button
+          onClick={() => { this.loadMoreTweetSuccess(); }}>
+          load more
+        </button>);
+      }
     }
+    return loadMoreSpace;
   }
 
   renderSearchNote(searchInProgress, searchString) {
