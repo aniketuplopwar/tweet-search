@@ -9,10 +9,10 @@ class TweetList extends React.Component {
 
   renderTweet(tweetInfo, tweetIdx) {
     const tweetUrl = 'viewTweet/'.concat(tweetInfo.tweetUserId).concat('/').concat(tweetInfo.tweetId);
-    const tweetLink = (<a class="open-in-new-tab-link" href={tweetUrl} target="_blank">open </a>);
+    const tweetLink = (<a className="open-in-new-tab-link" href={tweetUrl} target="_blank">open </a>);
     return (
       <div key={tweetIdx}>
-        <div class="tweet-wrapper">
+        <div className="tweet-wrapper">
           <Tweet
             tweetInfo={tweetInfo}
           />
@@ -45,7 +45,7 @@ class TweetList extends React.Component {
 
       result = (
         <div
-          class="tweet-list-container">
+          className="tweet-list-container">
           {tweetListHTML}
         </div>);
     }

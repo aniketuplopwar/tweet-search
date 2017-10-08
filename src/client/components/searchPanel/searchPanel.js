@@ -37,8 +37,10 @@ export class SearchPanel extends React.Component {
 
     axios(URL).then((response) => {
       const tweetSearchResult = response.data;
+      tweetSearchResult.currentPage = 0;
+      tweetSearchResult.searchString = searchString;
       this.props.searchTweetSuccess({
-        searchString, tweetSearchResult, searchInProgress: false,
+        tweetSearchResult, searchInProgress: false,
       });
     }).catch(error => {
       throw (error);

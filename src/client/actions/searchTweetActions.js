@@ -30,10 +30,9 @@ export const searchInProgress = info => {
  * @param info
  * @returns {{type, info: *}}
  */
-export const loadMoreTweetInProgress = info => {
+export const loadMoreTweetsInProgress = () => {
   return {
     type: ActionTypes.LOAD_MORE_TWEET_INPROGRESS,
-    info,
   };
 };
 

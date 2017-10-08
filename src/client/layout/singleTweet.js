@@ -6,23 +6,25 @@ import Tweet from '../components/tweet/tweet';
 import Spinner from '../components/spinner/spinner';
 
 export default class SingleTweet extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      tweetInfo: {}
-    }
+      tweetInfo: {},
+    };
   }
 
   componentDidMount() {
-    axios('/services/getHtml/'+this.props.match.params.tweetUserId+'/'+this.props.match.params.tweetId).then(response => {
-      this.setState({
-        tweetInfo: response.data
+    axios('/services/getHtml/'.concat(this.props.match.params.tweetUserId).concat('/')
+      .concat(this.props.match.params.tweetId)).then(response => {
+        this.setState({
+          tweetInfo: response.data,
+        });
       });
-    });
   }
 
   render() {
-    let tweet = this.state.tweetInfo.tweetHTML ? <Tweet tweetInfo={this.state.tweetInfo} /> : <Spinner />;
+    let tweet = this.state.tweetInfo.tweetHTML ? <Tweet tweetInfo={this.state.tweetInfo} /> :
+      <Spinner />;
     return (
       <div className="page-align-center">
         <Header />

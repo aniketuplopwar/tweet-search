@@ -19,7 +19,11 @@
   "rules": {
     "react/prefer-stateless-function": ["warn"],
     "arrow-body-style": ["warn"],
-    "react/jsx-closing-bracket-location": ["warn"]
+    "react/jsx-closing-bracket-location": ["warn"],
+    "react/prop-types": ["warn"],
+    "no-param-reassign": ["warn"],
+    "no-else-return": ["warn"],
+    "max-len": [2,150, 4]
 
   }
 }

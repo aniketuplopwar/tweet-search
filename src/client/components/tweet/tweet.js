@@ -10,9 +10,9 @@ class Tweet extends React.Component {
   render() {
     const tweetInfo = this.props.tweetInfo;
     return (
-        <div
-          className="tweet-content"
-          dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
+      <div
+        className="tweet-content"
+        dangerouslySetInnerHTML={this.createMarkup(tweetInfo.tweetHTML)} />
     );
   }
 }
