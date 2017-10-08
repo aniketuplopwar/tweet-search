@@ -18,7 +18,7 @@ class Tweet extends React.Component {
 }
 
 Tweet.propTypes = {
-  tweetInfo: PropTypes.object.required,
+  tweetInfo: PropTypes.object,
 };
 
 export default Tweet;

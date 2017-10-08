@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import * as tweetActions from '../../actions/searchTweetActions';
-import SearchPaginationService from './searchPaginationService';
 import './searchPanel.scss';
 
 export class SearchPanel extends React.Component {

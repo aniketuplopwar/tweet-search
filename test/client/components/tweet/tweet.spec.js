@@ -20,13 +20,4 @@ describe('Tweet Component tests', function () {
     let content = wrapper.find('#tweet');
     expect(content.length).toBe(1);
   });
-
-  it('renders the tweet URL', function(){
-    const wrapper = render(
-      <Tweet tweetInfo={tweetInfo} />
-    );
-
-    let content = wrapper.find('.tweet-url')[0];
-    expect(content.attribs.href).toBe("/abc/123");
-  });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import TweetList from '../../../../src/client/components/tweetList/tweetList';
 import {tweetListWithZeroTweet, tweetListWithOneTweet} from './tweetList.data';
 
-describe('Tweet Component tests', function () {
+describe('TweetList Component tests', function () {
   let tweetListInfo;
 
   it('renders without problems', function () {

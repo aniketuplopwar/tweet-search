@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TweetList from '../tweetList/tweetList';
 import Spinner from '../spinner/spinner';
+import TweetSearchContent from '../../constants/tweetSearchContent';
 import './tweetSearchResult.scss';
 
 class TweetSearchResult extends React.Component {
 
   renderSearchNote(searchInProgress, searchString) {
     if (searchInProgress) {
-      return (<h2> Please wait...</h2>);
+      return TweetSearchContent.PLEASE_WAIT;
     }
-    return searchString === undefined ?
-      (<h2> Welcome to tweet search, Please input text to search Tweets</h2>) :
-      (<h4>Tweets search for "<strong>{searchString}</strong>"</h4>);
+    return searchString === undefined ? (TweetSearchContent.WELCOME_MESSAGE):
+      (TweetSearchContent.TWEET_SEARCH_FOR(searchString));
   }
 
 

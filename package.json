@@ -4,7 +4,7 @@
   "description": "Search tweets from text provided",
   "scripts": {
     "start": "babel-node --presets es2015 src/server/server",
-    "build": "NODE_ENV=production & webpack -p --config webpack.config.production.js",
+    "build": "NODE_ENV=production & webpack -p --config webpack.config.js",
     "lint": "node_modules/.bin/eslint ./src",
     "test-react": "NODE_ENV=testing jest ",
     "test-react:watch": "jest --watch",
