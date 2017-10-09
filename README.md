@@ -8,7 +8,8 @@ Also you can open each tweet from the search result in a new tab by clicking ope
 
 <h2> Build and deployment</h2>
 <p>
-BUILD:
+BUILD:<br>
+  <strong>npm install</strong><br>
 <strong>npm run build </strong>
 
 
