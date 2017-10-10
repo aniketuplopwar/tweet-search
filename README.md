@@ -10,7 +10,7 @@ Also you can open each tweet from the search result in a new tab by clicking ope
 <p>
 BUILD:<br>
   <strong>npm install</strong><br>
-<strong>npm run build </strong>
+<strong>npm run build </strong>  
 
 
 LINT:
@@ -23,6 +23,9 @@ TEST:
 
 RUN:
 <strong>npm run start </strong>
+
+Use http://localhost:3000/view to start the application
+
 </p>
 
 
