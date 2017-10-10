@@ -7,7 +7,7 @@ const app = express();
 
 app.use('/static', express.static(path.join(__dirname, '../../dist')));
 
-app.use('/view/*', ViewRoutes);
+app.use('/view', ViewRoutes);
 app.use('/services', APIRoutes);
 
 const port = process.env.PORT || 3000;
